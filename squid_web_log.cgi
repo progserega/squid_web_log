@@ -84,7 +84,7 @@ def print_html_header():
 <HTML>
 <HEAD>
 <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-<TITLE>Список пользователей домена DRSK</TITLE>
+<TITLE>Отчёт сквида</TITLE>
 <META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Linux)">
 <META NAME="AUTHOR" CONTENT="Сергей Семёнов">
 <META NAME="CREATED" CONTENT="20100319;10431100">
