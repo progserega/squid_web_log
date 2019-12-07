@@ -42,6 +42,8 @@ def main():
   result=[]
   with FileReadBackwards(conf.access_log_path, encoding="utf-8") as frb:
     for l in frb:
+      if filter_string!=None and filter_string not in l:
+        continue
       l=re.sub('\s+',' ', l)
       if conf.debug:
         print(l)
