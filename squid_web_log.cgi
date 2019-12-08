@@ -62,8 +62,9 @@ def main():
       item["downloaded_bytes"] =int(words[4])
       item["get_method"] =words[5]
       item["url"]=words[6]
-      if 7 in words:
-        item["data_type"]==words[7]
+      item["login"]=words[7]
+      if 9 in words:
+        item["data_type"]==words[9]
       else:
         item["data_type"]=""
 
@@ -255,15 +256,16 @@ def print_html_result(result, filter_string):
   out("""
     <TABLE BORDER>
     <TR>    
-        <TH COLSPAN=8>Отчёт сквида (%d строк)%s (последние строки сверху)</TH>
+        <TH COLSPAN=9>Отчёт сквида (%d строк)%s (последние строки сверху)</TH>
     </TR>
     <TR>    
-        <TH COLSPAN=8>Красный - ошибка сквида, фиолетовый - ошибка сайта в интернете, зелёный - всё хорошо</TH>
+        <TH COLSPAN=9>Красный - ошибка сквида, фиолетовый - ошибка сайта в интернете, зелёный - всё хорошо</TH>
     </TR>
     <TR>
         <TH COLSPAN=1>Дата/время запроса</TH>
         <TH COLSPAN=1>Результат http (результат сквида)</TH>
         <TH COLSPAN=1>ссылка</TH>
+        <TH COLSPAN=1>доменная авторизация</TH>
         <TH COLSPAN=1>адрес клиента</TH>
         <TH COLSPAN=1>скачано байт</TH>
         <TH COLSPAN=1>скачано за время (сек)</TH>
@@ -496,11 +498,17 @@ def print_html_result(result, filter_string):
       download_postfix="Гб"
       result_downloaded=result_downloaded_tmp
     downloaded_string="%.0f %s"%(result_downloaded,download_postfix)
+
+    if item["login"] == "-":
+      login_css="access_fail"
+    else:
+      login_css="access_good"
       
     out("""<TR>
      <TD id="username">%(string_time)s</TD>
      <TD id="%(access_result_css)s">%(access_result_string)s</TD>
      <TD id="url">%(url)s</TD>
+     <TD id="%(login_css)s">%(login)s</TD>
      <TD id="desc">%(clinet_address)s</TD>
      <TD id="acc_drsk_email">%(downloaded_string)s</TD>
      <TD id="pwd_drsk_email">%(download_time_sec)s сек.</TD>
@@ -513,6 +521,8 @@ def print_html_result(result, filter_string):
      "download_time_sec":item["download_time_sec"], \
      "access_result_css":access_result_css, \
      "access_result_string":access_result_string, \
+     "login":item["login"], \
+     "login_css":login_css, \
      "access_result_source":access_result_source, \
      "get_method":item["get_method"] \
      })
