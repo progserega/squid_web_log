@@ -104,6 +104,11 @@ tr	{
 	border: 1px solid #8da1b5;
 	font-family: Tahoma;
 	color: #4f4f4f;
+  max-width: 600px;
+  word-break: keep-all;
+  word-wrap: auto;
+  hyphens: auto;
+  word-wrap: break-word;
 }	
 #access_good {
 	border: 1px solid #8da1b5;
