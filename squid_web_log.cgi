@@ -46,7 +46,7 @@ def main():
         continue
       l=re.sub('\s+',' ', l)
       if conf.debug:
-        print(l)
+        out(l)
       item={}
       words=l.split(' ')
       item["unixtime"] =float(words[0])
@@ -75,11 +75,11 @@ def main():
 
   if conf.debug!=True:
     print_html_result(result,filter_string)
-    print("</body></html>")
+    out("</body></html>")
   return True
 
 def print_html_header():
-  print("""
+  out("""
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
@@ -242,13 +242,17 @@ tr	{
 """)
 
 
+def out(msg):
+  sys.stdout.buffer.write(msg.encode('utf8'))
+  sys.stdout.flush()
+
 def print_html_result(result, filter_string):
 
   if filter_string == None:
     filter_postfix=" - без фильтра"
   else:
     filter_postfix=", отфильтрованного по строке: %s"%filter_string
-  print("""
+  out("""
     <TABLE BORDER>
     <TR>    
         <TH COLSPAN=8>Отчёт сквида (%d строк)%s (последние строки сверху)</TH>
@@ -493,7 +497,7 @@ def print_html_result(result, filter_string):
       result_downloaded=result_downloaded_tmp
     downloaded_string="%.0f %s"%(result_downloaded,download_postfix)
       
-    print("""<TR>
+    out("""<TR>
      <TD id="username">%(string_time)s</TD>
      <TD id="%(access_result_css)s">%(access_result_string)s</TD>
      <TD id="url">%(url)s</TD>
@@ -512,7 +516,7 @@ def print_html_result(result, filter_string):
      "access_result_source":access_result_source, \
      "get_method":item["get_method"] \
      })
-  print("</TABLE>")
+  out("</TABLE>")
 
 
 
