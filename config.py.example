@@ -16,4 +16,4 @@ log_backup_count=30
 # 'midnight' - Roll over at midnight
 log_backup_when='midnight'
 
-debug=True
+debug=False
